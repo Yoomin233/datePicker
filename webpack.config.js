@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 module.exports = {
   entry: {
     main: [
@@ -47,6 +49,13 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'title defined in htmlWebpackPlugin',
+      // favicon: __dirname + '/favicon.png',
+      template: __dirname + '/src/index.html',
+      filename: './index.html',
+      chunks: ['main']
+    }),
   ]
 }
