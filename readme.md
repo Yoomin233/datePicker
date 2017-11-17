@@ -1,0 +1,1 @@
+this branch enables webpack's jsx transpilation and react hmr.

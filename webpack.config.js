@@ -3,7 +3,10 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    main: './src/main.js',
+    main: [
+      'react-hot-loader/patch',
+      './src/main.js'
+    ],
   },
   cache: true,
   devtool: 'eval-source-map',
@@ -18,11 +21,17 @@ module.exports = {
     contentBase: './src',
     historyApiFallback: true,
     // reload the entire page if file change(but will try hmr first if 'hot' enabled, else, reload the page directly)
-    inline: true,
-    hot: true
+    hot: true,
+    // dont refresh page if module can not be accepted
+    hotOnly: true
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: path.join(__dirname, './src')
+      },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
