@@ -5,13 +5,18 @@ const webpackBaseConfig = require('./webpack.config.base')
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+
+webpackBaseConfig.plugins.push(
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NamedModulesPlugin()
+)
 
 module.exports = Object.assign(webpackBaseConfig, {
   output: {
     path: path.join(__dirname, '../dist'),
-    // you can only use [chunkhash] in prod
-    filename: '[name].[hash:8].js',
+    // you can only use [chunkhash] in prod. hash is not needed here
+    filename: '[name].js',
     // unnecessary for the dev server. used mainly for serving purpose(CDN, etc). 
     // publicPath: '/'
   },
@@ -25,20 +30,5 @@ module.exports = Object.assign(webpackBaseConfig, {
     hotOnly: true
   },
   cache: true,
-  devtool: 'eval-source-map',
-  plugins: [
-    new CopyWebpackPlugin([{
-      from: './public',
-      to: './public'
-    }]),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'title defined in htmlWebpackPlugin',
-      // favicon: __dirname + '/favicon.png',
-      template: path.join(__dirname, '../src/index.html'),
-      filename: './index.html',
-      chunks: ['main']
-    })
-  ]
+  devtool: 'eval-source-map'
 })
