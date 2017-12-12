@@ -1,5 +1,6 @@
 {
   "presets": [
+    "stage-0",
     // tree-shaking, preventing 'import export' -> 'module.export' 
     ["es2015", {"modules": false}],
     "react"

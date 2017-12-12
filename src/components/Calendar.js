@@ -81,102 +81,104 @@ class DatePicker extends Component {
       [
         <input type="text" key='input' ref={elem => this.dataPickerInput = elem}/>,
         <button onClick={e => this.switchShowState()} key='button'>switch!</button>,
+        // this is portal rendered to document.body
         <Portal key='picker' style='position: absolute; left: 0; top: 0; width: 100%;'>
-          <AnimateShow show={active}>
-          <div className="app-calendar-root" style={pickerElemObj}>
-            <p className="app-calendar-control-row">
-              <span onClick={e => {
-                this.setDate({
-                  year: currentYear - 1,
-                  month: currentMonth
-                })
-              }}>&#60;&#60;</span>
-              <span onClick={e => {
-                this.setDate({
-                  year: currentMonth === 1 ? (currentYear - 1) : currentYear,
-                  month: currentMonth === 1 ? 12 : currentMonth - 1
-                })
-              }}>&#60;</span>
-              <span>{currentYear}.{currentMonth}</span>
-              <span onClick={e => {
-                this.setDate({
-                  year: currentMonth === 12 ? (currentYear + 1) : currentYear,
-                  month: currentMonth === 12 ? 1 : currentMonth + 1
-                })
-              }}>&#62;</span>
-              <span onClick={e => {
-                this.setDate({
-                  year: currentYear + 1,
-                  month: currentMonth
-                })
-              }}>&#62;&#62;</span>
-            </p>
-            <p className="app-calendar-weekday-row">
-              <span>S</span>
-              <span>M</span>
-              <span>T</span>
-              <span>W</span>
-              <span>T</span>
-              <span>F</span>
-              <span>S</span>
-            </p>
-            <div className="app-calendar-date-cell-outer-container">
-              <p className="app-calendar-date-cell-inner-container">
-                {
-                  Array.from({length: currentMonthFirstDateDay})
-                  .reduceRight((prev, next, index, arr) => prev.concat(
-                    <span 
-                    key={index} 
-                    className='prevMonthDateCell'
-                    onClick={e => {
-                      const output = {
-                        year: currentMonth === 1 ? currentYear - 1 : currentYear,
-                        month: currentMonth === 1 ? 12 : currentMonth - 1,
-                        date: prevMonthDateCount - index
-                      }
-                      this.props.onSelect(output)
-                    }}
-                  >{prevMonthDateCount - index}</span>), [])
-                }
-                {
-                  Array.from({length: currentMonthDateCount})
-                  .map((item, index) => <span 
-                    key={31 + index} 
-                    className={`dateCell ${
-                      currentYear === today.year &&
-                      currentMonth === today.month &&
-                      index + 1 === today.date ? 'isToday' : ''
-                    }`}
-                    onClick={e => {
-                    const output = {
-                      year: currentYear,
-                      month: currentMonth,
-                      date: index + 1
-                    }
-                    this.props.onSelect(output)
-                  }}>{index + 1}</span>)
-                }
-                {
-                  (currentMonthDateCount - (7 - currentMonthFirstDateDay)) % 7 ? 
-                  Array.from({ length: 7 - (currentMonthDateCount - (7 - currentMonthFirstDateDay)) % 7})
-                  .map((item, index) => 
-                  <span 
-                    key={62 + index} 
-                    className='nextMonthDateCell'
+          {/* this is animation component */}
+          <AnimateShow show={active} style={pickerElemObj}>
+            <div className="app-calendar-root">
+              <p className="app-calendar-control-row">
+                <span onClick={e => {
+                  this.setDate({
+                    year: currentYear - 1,
+                    month: currentMonth
+                  })
+                }}>&#60;&#60;</span>
+                <span onClick={e => {
+                  this.setDate({
+                    year: currentMonth === 1 ? (currentYear - 1) : currentYear,
+                    month: currentMonth === 1 ? 12 : currentMonth - 1
+                  })
+                }}>&#60;</span>
+                <span>{currentYear}.{currentMonth}</span>
+                <span onClick={e => {
+                  this.setDate({
+                    year: currentMonth === 12 ? (currentYear + 1) : currentYear,
+                    month: currentMonth === 12 ? 1 : currentMonth + 1
+                  })
+                }}>&#62;</span>
+                <span onClick={e => {
+                  this.setDate({
+                    year: currentYear + 1,
+                    month: currentMonth
+                  })
+                }}>&#62;&#62;</span>
+              </p>
+              <p className="app-calendar-weekday-row">
+                <span>S</span>
+                <span>M</span>
+                <span>T</span>
+                <span>W</span>
+                <span>T</span>
+                <span>F</span>
+                <span>S</span>
+              </p>
+              <div className="app-calendar-date-cell-outer-container">
+                <p className="app-calendar-date-cell-inner-container">
+                  {
+                    Array.from({length: currentMonthFirstDateDay})
+                    .reduceRight((prev, next, index, arr) => prev.concat(
+                      <span 
+                      key={index} 
+                      className='prevMonthDateCell'
+                      onClick={e => {
+                        const output = {
+                          year: currentMonth === 1 ? currentYear - 1 : currentYear,
+                          month: currentMonth === 1 ? 12 : currentMonth - 1,
+                          date: prevMonthDateCount - index
+                        }
+                        this.props.onSelect(output)
+                      }}
+                    >{prevMonthDateCount - index}</span>), [])
+                  }
+                  {
+                    Array.from({length: currentMonthDateCount})
+                    .map((item, index) => <span 
+                      key={31 + index} 
+                      className={`dateCell ${
+                        currentYear === today.year &&
+                        currentMonth === today.month &&
+                        index + 1 === today.date ? 'isToday' : ''
+                      }`}
                       onClick={e => {
                       const output = {
-                        year: currentMonth === 12 ? currentYear + 1 : currentYear,
-                        month: currentMonth === 12 ? 1 : currentMonth + 1,
+                        year: currentYear,
+                        month: currentMonth,
                         date: index + 1
                       }
                       this.props.onSelect(output)
-                    }}
-                  >{index + 1}</span>)
-                  : null
-                }
-              </p>
+                    }}>{index + 1}</span>)
+                  }
+                  {
+                    (currentMonthDateCount - (7 - currentMonthFirstDateDay)) % 7 ? 
+                    Array.from({ length: 7 - (currentMonthDateCount - (7 - currentMonthFirstDateDay)) % 7})
+                    .map((item, index) => 
+                    <span 
+                      key={62 + index} 
+                      className='nextMonthDateCell'
+                        onClick={e => {
+                        const output = {
+                          year: currentMonth === 12 ? currentYear + 1 : currentYear,
+                          month: currentMonth === 12 ? 1 : currentMonth + 1,
+                          date: index + 1
+                        }
+                        this.props.onSelect(output)
+                      }}
+                    >{index + 1}</span>)
+                    : null
+                  }
+                </p>
+              </div>
             </div>
-          </div>
           </AnimateShow>
         </Portal>
       ]
