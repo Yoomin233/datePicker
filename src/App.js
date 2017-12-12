@@ -4,10 +4,8 @@ import ReactDOM from 'react-dom'
 import Image from './img.png'
 import './style.css'
 
-export default () => <div>
-  this is pakage 7!
-  <input type="text"/>
-  <div>
-    {/* <img src={Image} alt=""/> */}
-  </div>
+import DatePicker from './components/Calendar'
+
+export default () => <div className='app-root'>
+  <DatePicker onSelect={dateObject => console.log(dateObject) } />
 </div>

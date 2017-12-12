@@ -1,8 +1,10 @@
 {
   "presets": [
+    // tree-shaking, preventing 'import export' -> 'module.export' 
     ["es2015", {"modules": false}],
     "react"
   ],
+  // enable hmr
   "plugins": [
     "react-hot-loader/babel"
   ]

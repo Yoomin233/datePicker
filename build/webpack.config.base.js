@@ -41,7 +41,7 @@ module.exports = {
         ] : ExtractTextWebpackPlugin.extract({
           // incase extract is not a success
           fallback: 'style-loader',
-          use: 'css-loader',
+          use: 'css-loader?minimize',
         })
         // loader: 'style-loader!css-loader'
       },
