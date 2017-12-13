@@ -1,11 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React, {Component} from 'react'
 
-import Image from './img.png'
+import DatePicker from './components/DatePicker'
+
 import './style.css'
 
-import DatePicker from './components/Calendar'
+class App extends Component {
+  render () {
+    return (
+      <div className='app-root'>
+        <DatePicker 
+          onSelect={data => console.log(data)}
+        />
+      </div>
+    )
+  }
+}
 
-export default () => <div className='app-root'>
-  <DatePicker onSelect={dateObject => console.log(dateObject) } />
-</div>
+export default App

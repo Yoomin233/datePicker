@@ -1,0 +1,141 @@
+:root {
+    --color-background: #2C3E50;
+    --text-color: #FC4349;
+    --color-minor: #5d5d5d;
+    --border-radius: 4px;
+    --text-shadow-spread: 1px;
+}
+
+.app-calendar-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.app-calendar-input-wrapper>input {
+    width: 154px;
+    border: none;
+    outline: none;
+    padding: 4px 45px 4px 10px;
+    box-sizing: border-box;
+    height: 34px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-minor);
+    transition: border .5s ease;
+}
+
+.app-calendar-input-wrapper>input:focus {
+    border-color: var(--color-background);
+    outline: none;
+}
+
+.app-calendar-input-wrapper > span {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    line-height: 9px;
+    text-align: center;
+    right: 30px;
+    padding: 1px;
+    top: 50%;
+    transform: translateY(-55%);
+    color: #fff;
+    background-color: var(--color-minor);
+    border-radius: 50%;
+    cursor: default;
+}
+
+.app-calendar-input-wrapper > svg {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-55%);
+    fill: var(--color-minor);
+}
+
+.app-calendar-input-wrapper > svg:hover {
+    fill: var(--color-background);
+}
+
+.app-calendar-input-wrapper > span:hover {
+    background-color: var(--color-background);
+}
+
+
+.app-calendar-root {
+    width: 210px;
+    border: 1px solid var(--color-minor);
+    border-radius: var(--border-radius);
+    background-color: var(--color-background);
+    color: var(--text-color);
+    padding: 10px;
+    margin: 0;
+}
+
+p.app-calendar-control-row,
+p.app-calendar-weekday-row,
+p.app-calendar-date-cell-inner-container {
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    text-shadow: 0 0 var(--text-shadow-spread) var(--text-color);
+}
+
+div.app-calendar-date-cell-outer-container {
+    display: flex;
+}
+
+p.app-calendar-date-cell-inner-container {
+    flex-shrink: 0;
+    width: 100%;
+    margin-right: 10%;
+}
+
+p.app-calendar-control-row>span:nth-child(3) {
+    width: 90px;
+}
+
+p.app-calendar-control-row>span,
+p.app-calendar-weekday-row>span,
+p.app-calendar-date-cell-inner-container>span {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+    transition: background .3s ease;
+    cursor: pointer;
+}
+
+p.app-calendar-control-row>span:hover,
+p.app-calendar-weekday-row>span:hover,
+p.app-calendar-date-cell-inner-container>span:hover {
+    background-color: var(--color-minor);
+}
+
+p.app-calendar-date-cell-inner-container>span:not(.dateCell) {
+    color: var(--color-minor);
+    text-shadow: 0 0 var(--text-shadow-spread) var(--color-minor);
+}
+
+p.app-calendar-date-cell-inner-container>span.isToday {
+    border: 1px solid var(--color-minor);
+    line-height: 28px;
+}
+
+p.app-calendar-date-cell-inner-container>span.monthCell {
+  width: 52.5px;
+  color: var(--text-color);
+}
+
+.app-animate-container {
+    transition: all .2s ease-in-out;
+    transform-origin: top center;
+}
+
+.app-animate-before-enter,
+.app-animate-left {
+    transform: scaleY(.2);
+    opacity: 0;
+}

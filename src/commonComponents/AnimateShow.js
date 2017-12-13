@@ -1,29 +1,33 @@
 import React, {Component} from 'react'
 
 class AnimateShow extends Component {
-  // componentWillMount () {
-  //   this.setState({
-  //     styleObj: this.props.show ? {
-  //       'display': 'block'
-  //     } : {
-  //         'display': 'none'
-  //       }
-  //   })
-  // }
-  constructor (props) {
-    super(props)
-    this.state = {
-      internalStyle: {
+  componentWillMount () {
+    this.setState({
+      displayStyle: {
         'display': 'none'
       }
-    }
+    })
   }
   componentWillReceiveProps (nextProps, nextState) {
-    const delay = 5000
+    if (!this.props.relativeElem && nextProps.relativeElem || this.props.relativeElem === document.body && nextProps.relativeElem !== document.body) {
+      const {
+        top,
+        left,
+        width,
+        height
+      } = nextProps.relativeElem.getBoundingClientRect()
+      this.setState({
+        positionInfo: {
+          top: top + height + 2,
+          left: left + width / 4,
+          position: 'absolute'
+        }
+      })
+    }
     if (!this.props.show && nextProps.show) {
       this.setState({
         className: 'app-animate-before-enter',
-        internalStyle: {
+        displayStyle: {
           display: 'block'
         }
       })
@@ -31,33 +35,32 @@ class AnimateShow extends Component {
         this.setState({
           className: 'app-animate-entered'
         })
-      }, delay)
+      }, 0)
     } else if (this.props.show && !nextProps.show) {
       this.setState({
-        className: 'app-animate-leaving'
+        className: 'app-animate-left'
       })
-      setTimeout(() => {
-        this.setState({
-          className: 'app-animate-left',
-          internalStyle: {
+      const self = this
+      this.animateElem.addEventListener('transitionend', function anony (e) {
+        self.animateElem.removeEventListener('transitionend', anony)
+        self.setState({
+          displayStyle: {
             'display': 'none'
           }
         })
-      }, delay)
+      })
     }
   }
   render () {
     const {
       className,
-      internalStyle
+      displayStyle,
+      positionInfo
     } = this.state
-    const {
-      style: externalStyle,
-    } = this.props
     return (
-      <div className={`${className} app-animate-container`} ref={elem => this.animateElem = elem} style={{
-        ...externalStyle,
-        ...internalStyle
+      <div className={`${className || ''} app-animate-container`} ref={elem => this.animateElem = elem} style={{
+        ...displayStyle,
+        ...positionInfo
       }}>
         {this.props.children}
       </div>
@@ -66,7 +69,8 @@ class AnimateShow extends Component {
 }
 
 AnimateShow.defaultProps = {
-  show: false
+  show: false,
+  relativeElem: document.body
 }
 
 export default AnimateShow
