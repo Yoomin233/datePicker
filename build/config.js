@@ -1,1 +1,1 @@
-exports.publicPath = '/demo'
+exports.publicPath = '/datePicker/demo/'
