@@ -237,6 +237,24 @@ class DatePicker extends Component {
                     }
                   </p>
                 }
+                {
+                  whichPanel === 'year' && 
+                  <p className='app-calendar-date-cell-year-container'>
+                    {
+                      Array.from({length: 24})
+                      .map((item, index) => (
+                        <span className='yearCell' key={index} onClick={e => {
+                          this.setState({
+                            currentYear: index + currentYear - 12,
+                            whichPanel: 'date'
+                          })
+                        }}>
+                          {index + currentYear - 12}
+                        </span>
+                      ))
+                    }
+                  </p>
+                }
               </div>
             </div>
           </AnimateShow>

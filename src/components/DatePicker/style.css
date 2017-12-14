@@ -75,22 +75,13 @@
 
 p.app-calendar-control-row,
 p.app-calendar-weekday-row,
-p.app-calendar-date-cell-inner-container {
+p.app-calendar-date-cell-inner-container,
+p.app-calendar-date-cell-year-container {
     margin: 0;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     text-shadow: 0 0 var(--text-shadow-spread) var(--text-color);
-}
-
-div.app-calendar-date-cell-outer-container {
-    display: flex;
-}
-
-p.app-calendar-date-cell-inner-container {
-    flex-shrink: 0;
-    width: 100%;
-    margin-right: 10%;
 }
 
 p.app-calendar-control-row>span:nth-child(3) {
@@ -99,7 +90,8 @@ p.app-calendar-control-row>span:nth-child(3) {
 
 p.app-calendar-control-row>span,
 p.app-calendar-weekday-row>span,
-p.app-calendar-date-cell-inner-container>span {
+p.app-calendar-date-cell-inner-container>span,
+p.app-calendar-date-cell-year-container>span {
     width: 30px;
     height: 30px;
     line-height: 30px;
@@ -110,7 +102,8 @@ p.app-calendar-date-cell-inner-container>span {
 
 p.app-calendar-control-row>span:hover,
 p.app-calendar-weekday-row>span:hover,
-p.app-calendar-date-cell-inner-container>span:hover {
+p.app-calendar-date-cell-inner-container>span:hover, 
+p.app-calendar-date-cell-year-container>span:hover {
     background-color: var(--color-minor);
 }
 
@@ -124,7 +117,7 @@ p.app-calendar-date-cell-inner-container>span.isToday {
     line-height: 28px;
 }
 
-p.app-calendar-date-cell-inner-container>span.monthCell {
+p.app-calendar-date-cell-inner-container>span.monthCell, p.app-calendar-date-cell-year-container>span.yearCell {
   width: 52.5px;
   color: var(--text-color);
 }
