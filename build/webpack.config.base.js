@@ -27,7 +27,7 @@ module.exports = {
           }
         ],
         // loader: 'babel-loader',
-        include: path.join(__dirname, '../src')
+        exclude: path.join(__dirname, '../node_modules')
       },
       {
         test: /\.css$/,
@@ -81,13 +81,10 @@ module.exports = {
       ],
       threads: os.cpus().length
     }),
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, '../public'),
-      to: './public'
-    }, {
-      from: path.join(__dirname, '../public/webpack.svg'),
-      to: './'
-    }]),
+    // new CopyWebpackPlugin([{
+    //   from: path.join(__dirname, '../public'),
+    //   to: './public'
+    // }]),
     // create index.html automatically
     new HtmlWebpackPlugin({
       title: 'title defined in htmlWebpackPlugin',
@@ -95,7 +92,7 @@ module.exports = {
       template: path.join(__dirname, '../src/index.html'),
       filename: 'index.html',
       chunks: ['main', 'vendor', 'manifest'],
-      favicon: './public/webpack.svg'
+      // favicon: './public/webpack.svg'
     })
   ]
 }

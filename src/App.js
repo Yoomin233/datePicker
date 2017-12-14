@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 
 import DatePicker from './components/DatePicker'
 
-import './style.css'
-
 class App extends Component {
   render () {
     return (

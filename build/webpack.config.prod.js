@@ -12,7 +12,7 @@ const InlineChunkWebpackPlugin = require('html-webpack-inline-chunk-plugin');
 
 webpackBaseConfig.plugins.push(
   // clean dist directory
-  new CleanWebpackPlugin(path.join(__dirname, '../dist'), {
+  new CleanWebpackPlugin(path.join(__dirname, '../demo'), {
     allowExternal: true
   }),
   // inject manifest chunk into index.html
@@ -50,7 +50,7 @@ webpackBaseConfig.plugins.push(
 
 module.exports = Object.assign(webpackBaseConfig, {
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../demo'),
     // you can only use [chunkhash] in prod
     filename: '[name].[chunkhash:8].js',
     // unnecessary for the dev server. used mainly for serving purpose(CDN, etc). 
