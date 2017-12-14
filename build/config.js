@@ -1,1 +1,1 @@
-exports.publicPath = '/'
+exports.publicPath = '/demo'
